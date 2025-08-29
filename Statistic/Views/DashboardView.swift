@@ -10,6 +10,7 @@ import SwiftData
 
 struct DashboardView: View {
     var body: some View {
+        DashboardComponentView()
     }
         
 }
