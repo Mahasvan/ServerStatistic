@@ -15,12 +15,12 @@ enum ServerComponents: String, CaseIterable, Decodable {
 }
 
 @Model
-class ServerModel {
+class ServerModel: Identifiable {
     @Attribute(.unique) var id = UUID()
-    private(set) var name: String
-    private(set) var host: String
-    private(set) var port: Int
-    private(set) var components: [String] = []
+    var name: String
+    var host: String
+    var port: Int
+    var components: [String] = []
     
     init(name: String, host: String, port: Int, components: [ServerComponents]) {
         self.name = name 
@@ -65,6 +65,8 @@ class ComponentViewModel: ObservableObject {
         
         do {
             componentResponse = try await NetworkManager.shared.fetchComponentData(
+                host: server.host,
+                port: server.port,
                 cpu: server.components.contains("CPU"),
                 memory: server.components.contains("Memory"),
                 disk: server.components.contains("Disk"))

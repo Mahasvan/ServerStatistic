@@ -54,6 +54,7 @@ struct ShortComponentView: View {
                 .padding(padding)
         }
         .frame(width: frameSize, height: frameSize)
+        .padding(padding)
         
     }
 }

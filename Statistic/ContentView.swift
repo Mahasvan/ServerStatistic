@@ -6,17 +6,17 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct ContentView: View {
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-            DashboardView()
+        NavigationSplitView {
+            SidebarView()
+        } detail: {
+            SidebarItems[0].navigationLink
         }
-        .padding()
+        .frame(minWidth: 700, minHeight: 500)
+        .modelContainer(for: [ServerModel.self])
     }
 }
 

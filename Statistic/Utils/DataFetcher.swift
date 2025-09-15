@@ -10,8 +10,9 @@ import Foundation
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func fetchComponentData(cpu: Bool, memory: Bool, disk: Bool) async throws -> ComponentResponseModel {
-        guard let url = URL(string: "http://localhost:8000/components?cpu=\(cpu)&memory=\(cpu)&disk=\(cpu)") else {
+    func fetchComponentData(host: String, port: Int, cpu: Bool, memory: Bool, disk: Bool) async throws -> ComponentResponseModel {
+        let query = "\(host):\(port)/components?cpu=\(cpu)&memory=\(cpu)&disk=\(cpu)"
+        guard let url = URL(string: query) else {
             throw URLError(.badURL)
         }
         let (data, _) = try await URLSession.shared.data(from: url)
