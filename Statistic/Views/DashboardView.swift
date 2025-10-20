@@ -25,8 +25,6 @@ struct DashboardView: View {
                         }
 
                     }
-                    
-                        
                 }
             }
             else {
@@ -35,6 +33,8 @@ struct DashboardView: View {
                         Text(server.name)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(10)
+                            .font(.title2)
+                            .fontDesign(.rounded)
                         DashboardComponentView(serverModel: .constant(server))
                     }
                 }

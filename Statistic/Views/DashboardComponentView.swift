@@ -22,31 +22,20 @@ struct DashboardComponentView: View {
                 if (serverModel.components.contains("CPU")) {
                     let currentCpuUsage: Float = viewModel.componentResponse.cpu?.currentUsage ?? 0.0
                     
-                    ShortComponentView(
-                        titleText: .constant("CPU"),
-                        subtitleText: .constant(getCpuString(percentage: currentCpuUsage)),
-                        progress: .constant(CGFloat(currentCpuUsage)))
+                    CPUShortView(usage: .constant(currentCpuUsage * 100), temp: .constant(0.0))
                 }
 
                 if (serverModel.components.contains("Disk")) {
                     let currentDiskUsage: Float = viewModel.componentResponse.disk?.currentUsage ?? 0.0
                     
-                    ShortComponentView(
-                        titleText: .constant("Disk"),
-                        subtitleText: .constant(getCpuString(percentage: currentDiskUsage)),
-                        progress: .constant(CGFloat(currentDiskUsage)))
+                    DiskShortView(usagePercent: .constant(currentDiskUsage), usedSpace: .constant(250))
                 }
                 
                 if (serverModel.components.contains("Memory")) {
                     let currentMemoryUsage: Float = viewModel.componentResponse.memory?.currentUsage ?? 0.0
                     
-                    ShortComponentView(
-                        titleText: .constant("Memory"),
-                        subtitleText: .constant(getCpuString(percentage: currentMemoryUsage)),
-                        progress: .constant(CGFloat(currentMemoryUsage)))
+                    MemoryShortView(usagePercent: .constant(currentMemoryUsage))
                 }
-                
-                
             }
             .task {
                 repeat {
