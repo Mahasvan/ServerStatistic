@@ -1,103 +1,80 @@
-#
-//  server.py
-//  Statistic
-//
-//  Created by Mahasvan Mohan on 15/09/25.
-//
+# server.py
+# A simple API server that matches the structure your Swift client expects.
 
-try:
-    from fastapi import FastAPI, Query
-    from pydantic import BaseModel
-    from typing import List, Optional
-    import psutil
-    import time
-    import uvicorn
-except:
-    print("Could not import libraries. Please install fastapi, uvicorn, and psutil.")
-    exit(0)
+from fastapi import FastAPI, Query
+from pydantic import BaseModel
+import psutil  # optional; used for real metrics. Install with: pip install psutil
+import uvicorn
 
-history: dict = {
-    "cpu": [],
-    "memory": [],
-    "disk": []
-}
-limit = 10
 
 app = FastAPI()
 
-# ---------- Response Models ----------
+# ---------- RESPONSE MODELS ----------
+
+
 class CPUResponseModel(BaseModel):
-    currentUsage: float
-    usageHistory: Optional[List[float]] = None
+    currentUsage: float | None = None
+    currentTemp: float | None = None
 
 
 class MemoryResponseModel(BaseModel):
-    currentUsage: float
-    usageHistory: Optional[List[float]] = None
+    currentUsage: float | None = None
+    totalCapacity: float | None = None
 
 
 class DiskResponseModel(BaseModel):
-    currentUsage: float
-    usageHistory: Optional[List[float]] = None
+    currentUsage: float | None = None
+    totalCapacity: float | None = None
 
 
 class ComponentResponseModel(BaseModel):
-    cpu: Optional[CPUResponseModel] = None
-    memory: Optional[MemoryResponseModel] = None
-    disk: Optional[DiskResponseModel] = None
+    cpu: CPUResponseModel | None = None
+    memory: MemoryResponseModel | None = None
+    disk: DiskResponseModel | None = None
 
 
+# ---------- ROUTES ----------
 
-# ---------- API Endpoint ----------
+
 @app.get("/components", response_model=ComponentResponseModel)
 def get_components(
-    cpu: bool = Query(False, description="Include CPU data"),
-    memory: bool = Query(False, description="Include Memory data"),
-    disk: bool = Query(False, description="Include Disk data")
+    cpu: bool = Query(default=False),
+    memory: bool = Query(default=False),
+    disk: bool = Query(default=False),
 ):
-    response = ComponentResponseModel()
+    response = {}
 
+    # CPU
     if cpu:
-        # psutil.cpu_percent() gives current CPU usage percentage
-        current = psutil.cpu_percent() / 100.0
+        usage = psutil.cpu_percent(interval=0.1)
+        temp = None
+        try:
+            temp_data = psutil.sensors_temperatures()
+            if temp_data:
+                temp = temp_data[list(temp_data.keys())[0]][0].current
+        except Exception:
+            temp = None
 
-        history["cpu"].append(current)
-        if len(history["cpu"]) > limit:
-            history["cpu"] = history["cpu"][-limit:]
+        response["cpu"] = CPUResponseModel(currentUsage=usage, currentTemp=temp)
 
-        response.cpu = CPUResponseModel(
-            currentUsage=round(current, 3),
-            usageHistory=history["cpu"]
-        )
-
+    # Memory
     if memory:
         mem = psutil.virtual_memory()
-        current = mem.percent / 100.0
-
-        history["memory"].append(current)
-        if len(history["memory"]) > limit:
-            history["memory"] = history["memory"][-limit:]
-
-        response.memory = MemoryResponseModel(
-            currentUsage=round(current, 3),
-            usageHistory=history["memory"]
+        response["memory"] = MemoryResponseModel(
+            currentUsage=mem.percent, totalCapacity=mem.total / (1024**3)
         )
 
+    # Disk
     if disk:
-        disk_usage = psutil.disk_usage('/')
-        current = disk_usage.percent / 100.0
-
-        history["disk"].append(current)
-        if len(history["disk"]) > limit:
-            history["disk"] = history["disk"][-limit:]
-
-        response.disk = DiskResponseModel(
-            currentUsage=round(current, 3),
-            usageHistory=history["disk"]
+        disk_stat = psutil.disk_usage("/")
+        response["disk"] = DiskResponseModel(
+            currentUsage=disk_stat.percent, totalCapacity=disk_stat.total / (1024**3)
         )
 
-    return response
+    return ComponentResponseModel(**response)
 
+
+# ---------- RUN ----------
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8005)
+    uvicorn.run(app, host="0.0.0.0", port=8000)

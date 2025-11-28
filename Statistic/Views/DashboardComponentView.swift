@@ -20,21 +20,22 @@ struct DashboardComponentView: View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if (serverModel.components.contains("CPU")) {
-                    let currentCpuUsage: Float = viewModel.componentResponse.cpu?.currentUsage ?? 0.0
-                    
-                    CPUShortView(usage: .constant(currentCpuUsage * 100), temp: .constant(0.0))
+                    let currentCpuUsage: Float? = viewModel.componentResponse.cpu?.currentUsage
+                    let currentCpuTemp: Float? = viewModel.componentResponse.cpu?.currentTemp
+                    CPUShortView(usage: .constant(currentCpuUsage), temp: .constant(currentCpuTemp))
                 }
 
                 if (serverModel.components.contains("Disk")) {
                     let currentDiskUsage: Float = viewModel.componentResponse.disk?.currentUsage ?? 0.0
+                    let totalDiskCapacity: Float = viewModel.componentResponse.disk?.totalCapacity ?? 0.0
                     
-                    DiskShortView(usagePercent: .constant(currentDiskUsage), usedSpace: .constant(250))
+                    DiskShortView(usagePercent: .constant(currentDiskUsage), totalCapacity: .constant(totalDiskCapacity))
                 }
                 
                 if (serverModel.components.contains("Memory")) {
-                    let currentMemoryUsage: Float = viewModel.componentResponse.memory?.currentUsage ?? 0.0
-                    
-                    MemoryShortView(usagePercent: .constant(currentMemoryUsage))
+                    let currentMemoryUsage: Float? = viewModel.componentResponse.memory?.currentUsage
+                    let totalMemoryCapacity: Float? = viewModel.componentResponse.memory?.totalCapacity
+                    MemoryShortView(usagePercent: .constant(currentMemoryUsage), totalCapacity: .constant(totalMemoryCapacity))
                 }
             }
             .task {
@@ -50,7 +51,7 @@ struct DashboardComponentView: View {
 }
 
 #Preview {
-    let vader = ServerModel(name: "vader", host: "http://vader.int", port: 8005, components: [.CPU, .Memory, .Disk])
+    let vader = ServerModel(scheme: "http", name: "vader", host: "localhost", port: 8000, components: [.CPU, .Memory, .Disk])
     DashboardComponentView(serverModel: .constant(vader))
         .frame(height: 500)
 }

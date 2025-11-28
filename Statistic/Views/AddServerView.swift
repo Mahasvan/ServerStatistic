@@ -7,10 +7,18 @@
 
 import SwiftUI
 
+enum Schemes: String, Hashable {
+    case http
+    case https
+}
+
+
+
 struct AddServerView: View {
     @Environment(\.modelContext) private var modelContext
+    @State private var scheme: Schemes = .http
     @State private var name: String = "My Cool Server"
-    @State private var host: String = "http://127.0.0.1"
+    @State private var host: String = "localhost"
     @State private var port: Int = 5001
     
     @State private var cpu: Bool = false
@@ -29,7 +37,13 @@ struct AddServerView: View {
             serverComponents.append(.Memory)
         }
         
-        let serverModel: ServerModel = .init(name: self.name, host: self.host, port: self.port, components: serverComponents)
+        let serverModel: ServerModel = .init(
+            scheme: self.scheme.rawValue,
+            name: self.name,
+            host: self.host,
+            port: self.port,
+            components: serverComponents
+        )
         modelContext.insert(serverModel)
     }
     
@@ -42,10 +56,18 @@ struct AddServerView: View {
     
     
     var body: some View {
+        
         Form {
-            TextField("Server Nickname", text: $name)
-            TextField("Server Host URL", text: $host)
+            TextField("Nickname", text: $name)
+            Picker(selection: $scheme, label: Text("Scheme")) {
+                Text("HTTP").tag(Schemes.http)
+                Text("HTTPS").tag(Schemes.https)
+            }
+            .pickerStyle(.palette)
+            
+            TextField("Host", text: $host)
             TextField("Port", value: $port, formatter: numberFormatter)
+            
             Toggle(isOn: $cpu) {
                 Text("CPU")
             }
@@ -60,7 +82,28 @@ struct AddServerView: View {
         }
         .frame(maxWidth: 500)
         .navigationTitle("Add Server")
+    
+        let url = "\(scheme.rawValue)://\(host):\(port.description)"
+        let link: URL? = URL.init(string: url)
+        if link != nil {
+
+            Text("Access Your Server At")
+//                .font(.caption)
+                .padding(.top, 10)
+                
+            HStack {
+                Link(destination: link ?? URL(string: "http://localhost")!) {
+                    Text(url)
+//                        .foregroundStyle(.blue)
+                        .font(.headline)
+                    Image(systemName: "link")
+                }
+            }
+        }
+        
     }
+    
+    
 }
 
 #Preview {

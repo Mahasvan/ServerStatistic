@@ -67,7 +67,7 @@ struct ExistingServersViewPreview: View {
     var body: some View {
         Button("Add servers", systemImage: "plus") {
             for i in 1...3 {
-                let model = ServerModel(name: "Hello", host: "192.168.1.10\(i)", port: i, components: [.CPU, .Memory, .Disk])
+                let model = ServerModel(scheme: "http", name: "Hello", host: "192.168.1.10\(i)", port: i, components: [.CPU, .Memory, .Disk])
                 modelContext.insert(model)
             }
         }

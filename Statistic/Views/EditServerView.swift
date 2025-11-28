@@ -122,7 +122,7 @@ struct EditServerView: View {
 }
 
 #Preview {
-    let server = ServerModel(name: "New Name", host: "Hi", port: 123, components: [.CPU, .Disk])
+    let server = ServerModel(scheme: "http", name: "New Name", host: "Hi", port: 123, components: [.CPU, .Disk])
     EditServerView(server: .constant(server))
         .modelContainer(for: ServerModel.self, inMemory: true)
 }

@@ -9,19 +9,24 @@ import SwiftUI
 
 struct CPUShortView: View {
 
-    @Binding var usage: Float
-    @Binding var temp: Float
+    @Binding var usage: Float?
+    @Binding var temp: Float?
 
     var body: some View {
         VStack(alignment: .leading) {
-            Text("CPU")
+            HStack {
+                Image(systemName: "cpu")
+                    .scaleEffect(1.5)
+                Text("CPU")
+                    .font(.title2)
+            }
             HStack(spacing: 0.0) {
-                Text(String(Int(usage)))
+                Text(formatFloatAsInt(usage))
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
             .font(.system(size: 40, weight: .bold))
-            Text("\(Int(temp))°C")
+            Text("\(formatFloatAsInt(temp))°C")
 //                .font(.system(size: 30, weight: .bold))
         }
         .frame(width: 120, height: 120)

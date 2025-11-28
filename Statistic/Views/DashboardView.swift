@@ -16,8 +16,8 @@ struct DashboardView: View {
         ScrollView() {
             if serverModels.isEmpty {
                 ZStack {
-                    Spacer()
-                        .containerRelativeFrame([.horizontal, .vertical])
+//                    Spacer()
+//                        .containerRelativeFrame([.horizontal, .vertical])
                     VStack {
                         Text("Add your server to get started.")
                         NavigationLink(destination: AddServerView()) {
@@ -51,7 +51,7 @@ struct DashboardViewPreview: View {
     var body: some View {
         VStack {
             Button("Add Items", systemImage: "plus") {
-                let vader = ServerModel(name: "vader", host: "http://vader.int", port: 8005, components: [.CPU, .Disk, .Memory])
+                let vader = ServerModel(scheme: "http", name: "vader", host: "localhost", port: 8005, components: [.CPU, .Disk, .Memory])
                 modelContext.insert(vader)
             }
             DashboardView()

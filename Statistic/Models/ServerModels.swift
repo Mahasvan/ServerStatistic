@@ -17,13 +17,15 @@ enum ServerComponents: String, CaseIterable, Decodable {
 @Model
 class ServerModel: Identifiable {
     @Attribute(.unique) var id = UUID()
+    var scheme: String
     var name: String
     var host: String
     var port: Int
     var components: [String] = []
     
-    init(name: String, host: String, port: Int, components: [ServerComponents]) {
-        self.name = name 
+    init(scheme: String, name: String, host: String, port: Int, components: [ServerComponents]) {
+        self.scheme = scheme
+        self.name = name
         self.host = host
         self.port = port
         self.components = components.map(\.self.rawValue)
@@ -31,18 +33,18 @@ class ServerModel: Identifiable {
 }
 
 struct CPUResponseModel: Decodable {
-    var currentUsage: Float
-    var usageHistory: [Float]?
+    var currentUsage: Float?
+    var currentTemp: Float?
 }
 
 struct MemoryResponseModel: Decodable {
-    var currentUsage: Float
-    var usageHistory: [Float]?
+    var currentUsage: Float?
+    var totalCapacity: Float?
 }
 
 struct DiskResponseModel: Decodable {
-    var currentUsage: Float
-    var usageHistory: [Float]?
+    var currentUsage: Float?
+    var totalCapacity: Float?
 }
 
 
@@ -51,7 +53,6 @@ struct ComponentResponseModel: Decodable {
     var memory: MemoryResponseModel?
     var disk: DiskResponseModel?
 }
-
 
 @MainActor
 class ComponentViewModel: ObservableObject {
@@ -63,21 +64,21 @@ class ComponentViewModel: ObservableObject {
         isLoading = true
         errorMessage = nil
         
+        var componentOptions = ComponentOptions()
+        componentOptions.cpu = server.components.contains("CPU")
+        componentOptions.memory = server.components.contains("Memory")
+        componentOptions.disk = server.components.contains("Disk")
+        
         do {
             componentResponse = try await NetworkManager.shared.fetchComponentData(
+                scheme: server.scheme,
                 host: server.host,
                 port: server.port,
-                cpu: server.components.contains("CPU"),
-                memory: server.components.contains("Memory"),
-                disk: server.components.contains("Disk"))
+                options: componentOptions
+            )
         } catch {
+            isLoading = false
             errorMessage = error.localizedDescription
-//            let cpu = server.components.contains("CPU")
-//            let memory = server.components.contains("Memory")
-//            let disk = server.components.contains("Disk")
-//            
-//            let url = URL(string: "http://127.0.0.1:8000/components?cpu=\(cpu)&memory=\(memory)&disk=\(cpu)")
-//            errorMessage = url?.absoluteString
         }
         isLoading = false
     }
