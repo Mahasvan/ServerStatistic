@@ -25,6 +25,9 @@ struct AddServerView: View {
     @State private var disk: Bool = false
     @State private var memory: Bool = false
     
+    @State private var showSuccessAlert: Bool = false
+    
+    
     func addServer() -> Void {
         var serverComponents: [ServerComponents] = []
         if cpu {
@@ -78,10 +81,22 @@ struct AddServerView: View {
                 Text("Memory")
             }
             
-            Button(action: addServer, label: { Text("Add Server") })
+            Button("Add Server") {
+                addServer()
+                showSuccessAlert = true
+            }
         }
         .frame(maxWidth: 500)
         .navigationTitle("Add Server")
+        .alert("Server Added", isPresented: $showSuccessAlert) {
+            if #available(macOS 26.0, *) {
+                Button("OK", role: .confirm) {}
+            } else {
+                Button("OK") {}
+            }
+        } message: {
+            Text("\(name) has been registered successfully!")
+        }
     
         let url = "\(scheme.rawValue)://\(host):\(port.description)"
         let link: URL? = URL.init(string: url)
