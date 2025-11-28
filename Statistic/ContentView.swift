@@ -9,8 +9,6 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    
-    
     var body: some View {
         NavigationSplitView {
             SidebarView()
@@ -19,10 +17,6 @@ struct ContentView: View {
         }
         .frame(minWidth: 700, minHeight: 500)
         .modelContainer(for: [ServerModel.self])
-        //        Text("Hello")
-        //        DashboardView()
-        //            .modelContainer(for: [ServerModel.self])
-        //    }
     }
 }
 

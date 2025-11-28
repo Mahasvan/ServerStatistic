@@ -13,21 +13,13 @@ struct DashboardView: View {
     @Query private var serverModels: [ServerModel]
     
     var body: some View {
-        ScrollView() {
-            if serverModels.isEmpty {
-                ZStack {
-//                    Spacer()
-//                        .containerRelativeFrame([.horizontal, .vertical])
-                    VStack {
-                        Text("Add your server to get started.")
-                        NavigationLink(destination: AddServerView()) {
-                            Text("Add Server")
-                        }
-
-                    }
-                }
+        if serverModels.isEmpty {
+            Text("Add your server to get started.")
+            NavigationLink(destination: AddServerView()) {
+                Text("Add Server")
             }
-            else {
+        } else {
+            ScrollView() {
                 ForEach(serverModels) { server in
                     VStack {
                         Text(server.name)
@@ -39,10 +31,9 @@ struct DashboardView: View {
                     }
                 }
             }
+            .navigationTitle("Dashboard - Statistic")
         }
-        .navigationTitle("Dashboard - Statistic")
     }
-        
 }
 
 struct DashboardViewPreview: View {
