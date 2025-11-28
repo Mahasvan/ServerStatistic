@@ -28,6 +28,7 @@ struct ExistingServersView: View {
         NavigationStack {
             Table(sortedServers, sortOrder: $sortOrder) {
                 TableColumn("Name", value: \.name)
+                TableColumn("Scheme", value: \.scheme)
                 TableColumn("Host", value: \.host)
                 TableColumn("Port", value: \.port.description)
                 TableColumn("Data") { server in
@@ -40,6 +41,7 @@ struct ExistingServersView: View {
                             Text("Edit")
                                 .foregroundStyle(.blue)
                         }
+                        
                         Button("Delete") {
                             isShowingDeleteAlert = true
                         }
