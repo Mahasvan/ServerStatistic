@@ -26,8 +26,8 @@ struct DashboardComponentView: View {
                 }
 
                 if (serverModel.components.contains("Disk")) {
-                    let currentDiskUsage: Float = viewModel.componentResponse.disk?.currentUsage ?? 0.0
-                    let totalDiskCapacity: Float = viewModel.componentResponse.disk?.totalCapacity ?? 0.0
+                    let currentDiskUsage: Float? = viewModel.componentResponse.disk?.currentUsage
+                    let totalDiskCapacity: Float? = viewModel.componentResponse.disk?.totalCapacity
                     
                     DiskShortView(usagePercent: .constant(currentDiskUsage), totalCapacity: .constant(totalDiskCapacity))
                 }
