@@ -14,6 +14,19 @@ enum ServerComponents: String, CaseIterable, Decodable {
     case Disk
 }
 
+func getComponentImage(_ component: String) -> String {
+    switch component {
+    case "CPU":
+        return "cpu.fill"
+    case "Memory":
+        return "memorychip.fill"
+    case "Disk":
+        return "internaldrive.fill"
+    default:
+        return "person.fill.questionmark"
+    }
+}
+
 @Model
 class ServerModel: Identifiable {
     @Attribute(.unique) var id = UUID()
