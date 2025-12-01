@@ -13,6 +13,20 @@ struct ComponentOptions: Codable {
     var disk: Bool = false
 }
 
+func queryItemsFromModel(_ model: ServerModel) async throws -> ComponentResponseModel {
+    let scheme = model.host
+    let host = model.host
+    let port = model.port
+    let options = model.components
+    
+    var componentOptions = ComponentOptions(
+        cpu: options.contains("CPU"),
+        memory: options.contains("Memory"),
+        disk: options.contains("Disk")
+    )
+    return try await NetworkManager.shared.fetchComponentData(scheme: scheme, host: host, port: port, options: componentOptions)
+}
+
 class NetworkManager {
     static let shared = NetworkManager()
     

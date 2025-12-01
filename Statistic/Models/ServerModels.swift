@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftData
+internal import Combine
 
 enum ServerComponents: String, CaseIterable, Decodable {
     case CPU
