@@ -14,6 +14,11 @@ enum ServerComponents: String, CaseIterable, Decodable {
     case Disk
 }
 
+enum Schemes: String, Hashable {
+    case http
+    case https
+}
+
 func getComponentImage(_ component: String) -> String {
     switch component {
     case "CPU":

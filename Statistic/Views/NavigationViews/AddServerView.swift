@@ -7,12 +7,6 @@
 
 import SwiftUI
 
-enum Schemes: String, Hashable {
-    case http
-    case https
-}
-
-
 
 struct AddServerView: View {
     @Environment(\.modelContext) private var modelContext
@@ -85,14 +79,17 @@ struct AddServerView: View {
                 addServer()
                 showSuccessAlert = true
             }
+            .modifier(GlassButton())
         }
         .frame(maxWidth: 500)
         .navigationTitle("Add Server")
         .alert("Server Added", isPresented: $showSuccessAlert) {
             if #available(macOS 26.0, *) {
                 Button("OK", role: .confirm) {}
+                    .modifier(GlassButton())
             } else {
                 Button("OK") {}
+                    .modifier(GlassButton())
             }
         } message: {
             Text("\(name) has been registered successfully!")

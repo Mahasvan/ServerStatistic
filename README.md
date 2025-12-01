@@ -8,5 +8,4 @@ This project is meant for my learning of Swift and SwiftUI.
 
 ## Usage
 - For the server, do `pip install fastapi uvicorn psutil` and run the server.py script.
-- For build instructions, I'm 'Working on it.
-
+- For build instructions, I'm Working on it.

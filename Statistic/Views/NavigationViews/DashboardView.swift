@@ -26,9 +26,11 @@ struct DashboardView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(10)
                             .font(.title2)
+                            .bold()
                             .fontDesign(.rounded)
                         DashboardComponentView(serverModel: .constant(server))
                     }
+                    Divider()
                 }
             }
             .navigationTitle("Dashboard - Statistic")

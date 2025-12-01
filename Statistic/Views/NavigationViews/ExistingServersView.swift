@@ -31,6 +31,7 @@ struct ExistingServersView: View {
         modelContext.delete(server)
     }
     
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -65,6 +66,7 @@ struct ExistingServersView: View {
 //                                    .scaleEffect(1.5)
                                     .padding(10)
                             }
+                            .modifier(GlassButton())
                             .buttonBorderShape(.capsule)
                             
                             Button(action: {
@@ -75,14 +77,17 @@ struct ExistingServersView: View {
                                     .padding(10)
                             }
 //                            .background(Color(.red).opacity(0.5))
+                            .modifier(GlassButton())
                             .foregroundStyle(.red)
                             .buttonBorderShape(.capsule)
                             .alert("Delete \(selectedServer?.name ?? "Server")?", isPresented: $isShowingDeleteAlert) {
                                 Button("Yes", role: .destructive) {
                                     deleteServer(server: selectedServer!)
                                 }
+                                .modifier(GlassButton())
                                 
                                 Button("Cancel", role: .cancel) {}
+                                    .modifier(GlassButton())
                             }
                             
                             

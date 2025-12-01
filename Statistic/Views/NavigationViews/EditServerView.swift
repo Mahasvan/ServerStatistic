@@ -113,7 +113,9 @@ struct EditServerView: View {
             }
             .alert("Updated!", isPresented: $isShowingAlert) {
                 Button("OK", role: .cancel) {}
+                    .modifier(GlassButton())
             }
+            .modifier(GlassButton())
         }
         .onAppear(perform: setValues)
         .frame(maxWidth: 500)
