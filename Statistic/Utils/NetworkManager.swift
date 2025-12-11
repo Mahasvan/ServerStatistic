@@ -19,7 +19,7 @@ func queryItemsFromModel(_ model: ServerModel) async throws -> ComponentResponse
     let port = model.port
     let options = model.components
     
-    var componentOptions = ComponentOptions(
+    let componentOptions = ComponentOptions(
         cpu: options.contains("CPU"),
         memory: options.contains("Memory"),
         disk: options.contains("Disk")
