@@ -8,22 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		3110AF4D2E786CD100DE2397 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 3110AF4C2E786CCD00DE2397 /* README.md */; };
-		31183BB12EDDCD5C006B6FC5 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DA5A1A2EDDAEBA0078F56B /* WidgetKit.framework */; };
-		31183BB22EDDCD5C006B6FC5 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DA5A1C2EDDAEBA0078F56B /* SwiftUI.framework */; };
-		31183BC12EDDCD5D006B6FC5 /* ComponentStatusWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 31183BB02EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		31DA5A1B2EDDAEBA0078F56B /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DA5A1A2EDDAEBA0078F56B /* WidgetKit.framework */; };
-		31DA5A1D2EDDAEBA0078F56B /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 31DA5A1C2EDDAEBA0078F56B /* SwiftUI.framework */; };
-		31DA5A2C2EDDAEBB0078F56B /* CPUWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 31DA5A182EDDAEBA0078F56B /* CPUWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		31183BBF2EDDCD5D006B6FC5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 319C2D782E606D1800864DF2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 31183BAF2EDDCD5C006B6FC5;
-			remoteInfo = ComponentStatusWidgetExtension;
-		};
 		319C2D8F2E606D1900864DF2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 319C2D782E606D1800864DF2 /* Project object */;
@@ -38,13 +25,6 @@
 			remoteGlobalIDString = 319C2D7F2E606D1800864DF2;
 			remoteInfo = Statistic;
 		};
-		31DA5A2A2EDDAEBB0078F56B /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 319C2D782E606D1800864DF2 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 31DA5A172EDDAEBA0078F56B;
-			remoteInfo = CPUWidgetExtension;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -54,8 +34,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				31183BC12EDDCD5D006B6FC5 /* ComponentStatusWidgetExtension.appex in Embed Foundation Extensions */,
-				31DA5A2C2EDDAEBB0078F56B /* CPUWidgetExtension.appex in Embed Foundation Extensions */,
 			);
 			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -64,41 +42,15 @@
 
 /* Begin PBXFileReference section */
 		3110AF4C2E786CCD00DE2397 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		31183BB02EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ComponentStatusWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		31183BD72EDDCE34006B6FC5 /* ComponentStatusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ComponentStatusWidgetExtension.entitlements; sourceTree = "<group>"; };
 		319C2D802E606D1800864DF2 /* Statistic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statistic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D8E2E606D1900864DF2 /* StatisticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D982E606D1900864DF2 /* StatisticUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		31DA5A182EDDAEBA0078F56B /* CPUWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CPUWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		31DA5A1A2EDDAEBA0078F56B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		31DA5A1C2EDDAEBA0078F56B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		31183BC42EDDCD5D006B6FC5 /* Exceptions for "ComponentStatusWidget" folder in "ComponentStatusWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 31183BAF2EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension */;
-		};
-		31183BD92EDDCFA0006B6FC5 /* Exceptions for "Statistic" folder in "ComponentStatusWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Models/ModelContainer.swift,
-				Models/ServerModels.swift,
-				Utils/NetworkManager.swift,
-				Utils/StringFormatting.swift,
-			);
-			target = 31183BAF2EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension */;
-		};
-		31DA5A312EDDAEBB0078F56B /* Exceptions for "CPUWidget" folder in "CPUWidgetExtension" target */ = {
-			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
-			membershipExceptions = (
-				Info.plist,
-			);
-			target = 31DA5A172EDDAEBA0078F56B /* CPUWidgetExtension */;
-		};
 		31DA5AA62EDDAEF70078F56B /* Exceptions for "Statistic" folder in "Statistic" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
@@ -109,14 +61,6 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		31183BB32EDDCD5C006B6FC5 /* ComponentStatusWidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				31183BC42EDDCD5D006B6FC5 /* Exceptions for "ComponentStatusWidget" folder in "ComponentStatusWidgetExtension" target */,
-			);
-			path = ComponentStatusWidget;
-			sourceTree = "<group>";
-		};
 		319C2D912E606D1900864DF2 /* StatisticTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = StatisticTests;
@@ -127,19 +71,10 @@
 			path = StatisticUITests;
 			sourceTree = "<group>";
 		};
-		31DA5A1E2EDDAEBA0078F56B /* CPUWidget */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			exceptions = (
-				31DA5A312EDDAEBB0078F56B /* Exceptions for "CPUWidget" folder in "CPUWidgetExtension" target */,
-			);
-			path = CPUWidget;
-			sourceTree = "<group>";
-		};
 		31DA5A8E2EDDAEF70078F56B /* Statistic */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				31DA5AA62EDDAEF70078F56B /* Exceptions for "Statistic" folder in "Statistic" target */,
-				31183BD92EDDCFA0006B6FC5 /* Exceptions for "Statistic" folder in "ComponentStatusWidgetExtension" target */,
 			);
 			path = Statistic;
 			sourceTree = "<group>";
@@ -147,15 +82,6 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		31183BAD2EDDCD5C006B6FC5 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				31183BB22EDDCD5C006B6FC5 /* SwiftUI.framework in Frameworks */,
-				31183BB12EDDCD5C006B6FC5 /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		319C2D7D2E606D1800864DF2 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -177,15 +103,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		31DA5A152EDDAEBA0078F56B /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				31DA5A1D2EDDAEBA0078F56B /* SwiftUI.framework in Frameworks */,
-				31DA5A1B2EDDAEBA0078F56B /* WidgetKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -195,8 +112,6 @@
 				31183BD72EDDCE34006B6FC5 /* ComponentStatusWidgetExtension.entitlements */,
 				319C2D912E606D1900864DF2 /* StatisticTests */,
 				319C2D9B2E606D1900864DF2 /* StatisticUITests */,
-				31DA5A1E2EDDAEBA0078F56B /* CPUWidget */,
-				31183BB32EDDCD5C006B6FC5 /* ComponentStatusWidget */,
 				31DA5A192EDDAEBA0078F56B /* Frameworks */,
 				319C2D812E606D1800864DF2 /* Products */,
 				3110AF4C2E786CCD00DE2397 /* README.md */,
@@ -210,8 +125,6 @@
 				319C2D802E606D1800864DF2 /* Statistic.app */,
 				319C2D8E2E606D1900864DF2 /* StatisticTests.xctest */,
 				319C2D982E606D1900864DF2 /* StatisticUITests.xctest */,
-				31DA5A182EDDAEBA0078F56B /* CPUWidgetExtension.appex */,
-				31183BB02EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -228,28 +141,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		31183BAF2EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 31183BC52EDDCD5D006B6FC5 /* Build configuration list for PBXNativeTarget "ComponentStatusWidgetExtension" */;
-			buildPhases = (
-				31183BAC2EDDCD5C006B6FC5 /* Sources */,
-				31183BAD2EDDCD5C006B6FC5 /* Frameworks */,
-				31183BAE2EDDCD5C006B6FC5 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				31183BB32EDDCD5C006B6FC5 /* ComponentStatusWidget */,
-			);
-			name = ComponentStatusWidgetExtension;
-			packageProductDependencies = (
-			);
-			productName = ComponentStatusWidgetExtension;
-			productReference = 31183BB02EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 		319C2D7F2E606D1800864DF2 /* Statistic */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 319C2DA22E606D1900864DF2 /* Build configuration list for PBXNativeTarget "Statistic" */;
@@ -262,8 +153,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				31DA5A2B2EDDAEBB0078F56B /* PBXTargetDependency */,
-				31183BC02EDDCD5D006B6FC5 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				31DA5A8E2EDDAEF70078F56B /* Statistic */,
@@ -321,28 +210,6 @@
 			productReference = 319C2D982E606D1900864DF2 /* StatisticUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		31DA5A172EDDAEBA0078F56B /* CPUWidgetExtension */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 31DA5A302EDDAEBB0078F56B /* Build configuration list for PBXNativeTarget "CPUWidgetExtension" */;
-			buildPhases = (
-				31DA5A142EDDAEBA0078F56B /* Sources */,
-				31DA5A152EDDAEBA0078F56B /* Frameworks */,
-				31DA5A162EDDAEBA0078F56B /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			fileSystemSynchronizedGroups = (
-				31DA5A1E2EDDAEBA0078F56B /* CPUWidget */,
-			);
-			name = CPUWidgetExtension;
-			packageProductDependencies = (
-			);
-			productName = CPUWidgetExtension;
-			productReference = 31DA5A182EDDAEBA0078F56B /* CPUWidgetExtension.appex */;
-			productType = "com.apple.product-type.app-extension";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -353,9 +220,6 @@
 				LastSwiftUpdateCheck = 2610;
 				LastUpgradeCheck = 2610;
 				TargetAttributes = {
-					31183BAF2EDDCD5C006B6FC5 = {
-						CreatedOnToolsVersion = 26.1.1;
-					};
 					319C2D7F2E606D1800864DF2 = {
 						CreatedOnToolsVersion = 16.4;
 					};
@@ -366,9 +230,6 @@
 					319C2D972E606D1900864DF2 = {
 						CreatedOnToolsVersion = 16.4;
 						TestTargetID = 319C2D7F2E606D1800864DF2;
-					};
-					31DA5A172EDDAEBA0078F56B = {
-						CreatedOnToolsVersion = 26.1.1;
 					};
 				};
 			};
@@ -389,20 +250,11 @@
 				319C2D7F2E606D1800864DF2 /* Statistic */,
 				319C2D8D2E606D1900864DF2 /* StatisticTests */,
 				319C2D972E606D1900864DF2 /* StatisticUITests */,
-				31DA5A172EDDAEBA0078F56B /* CPUWidgetExtension */,
-				31183BAF2EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		31183BAE2EDDCD5C006B6FC5 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		319C2D7E2E606D1800864DF2 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -425,23 +277,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		31DA5A162EDDAEBA0078F56B /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		31183BAC2EDDCD5C006B6FC5 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		319C2D7C2E606D1800864DF2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -463,21 +301,9 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		31DA5A142EDDAEBA0078F56B /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		31183BC02EDDCD5D006B6FC5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 31183BAF2EDDCD5C006B6FC5 /* ComponentStatusWidgetExtension */;
-			targetProxy = 31183BBF2EDDCD5D006B6FC5 /* PBXContainerItemProxy */;
-		};
 		319C2D902E606D1900864DF2 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 319C2D7F2E606D1800864DF2 /* Statistic */;
@@ -488,82 +314,9 @@
 			target = 319C2D7F2E606D1800864DF2 /* Statistic */;
 			targetProxy = 319C2D992E606D1900864DF2 /* PBXContainerItemProxy */;
 		};
-		31DA5A2B2EDDAEBB0078F56B /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 31DA5A172EDDAEBA0078F56B /* CPUWidgetExtension */;
-			targetProxy = 31DA5A2A2EDDAEBB0078F56B /* PBXContainerItemProxy */;
-		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		31183BC22EDDCD5D006B6FC5 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = ComponentStatusWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 32XNCXFRAJ;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ComponentStatusWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ComponentStatusWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahasvan.Statistic.ComponentStatusWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		31183BC32EDDCD5D006B6FC5 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_ENTITLEMENTS = ComponentStatusWidgetExtension.entitlements;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 32XNCXFRAJ;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ComponentStatusWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = ComponentStatusWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahasvan.Statistic.ComponentStatusWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				REGISTER_APP_GROUPS = YES;
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 		319C2DA02E606D1900864DF2 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -828,82 +581,9 @@
 			};
 			name = Release;
 		};
-		31DA5A2E2EDDAEBB0078F56B /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 32XNCXFRAJ;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CPUWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CPUWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahasvan.Statistic.CPUWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		31DA5A2F2EDDAEBB0078F56B /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 32XNCXFRAJ;
-				ENABLE_APP_SANDBOX = YES;
-				ENABLE_HARDENED_RUNTIME = YES;
-				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = CPUWidget/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = CPUWidget;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@executable_path/../../../../Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 26.1;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.mahasvan.Statistic.CPUWidget;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-				STRING_CATALOG_GENERATE_SYMBOLS = YES;
-				SWIFT_APPROACHABLE_CONCURRENCY = YES;
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		31183BC52EDDCD5D006B6FC5 /* Build configuration list for PBXNativeTarget "ComponentStatusWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				31183BC22EDDCD5D006B6FC5 /* Debug */,
-				31183BC32EDDCD5D006B6FC5 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		319C2D7B2E606D1800864DF2 /* Build configuration list for PBXProject "Statistic" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -936,15 +616,6 @@
 			buildConfigurations = (
 				319C2DA92E606D1900864DF2 /* Debug */,
 				319C2DAA2E606D1900864DF2 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		31DA5A302EDDAEBB0078F56B /* Build configuration list for PBXNativeTarget "CPUWidgetExtension" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				31DA5A2E2EDDAEBB0078F56B /* Debug */,
-				31DA5A2F2EDDAEBB0078F56B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
