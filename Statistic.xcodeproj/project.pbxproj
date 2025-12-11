@@ -42,7 +42,6 @@
 
 /* Begin PBXFileReference section */
 		3110AF4C2E786CCD00DE2397 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
-		31183BD72EDDCE34006B6FC5 /* ComponentStatusWidgetExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ComponentStatusWidgetExtension.entitlements; sourceTree = "<group>"; };
 		319C2D802E606D1800864DF2 /* Statistic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statistic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D8E2E606D1900864DF2 /* StatisticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D982E606D1900864DF2 /* StatisticUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -109,7 +108,6 @@
 		319C2D772E606D1800864DF2 = {
 			isa = PBXGroup;
 			children = (
-				31183BD72EDDCE34006B6FC5 /* ComponentStatusWidgetExtension.entitlements */,
 				319C2D912E606D1900864DF2 /* StatisticTests */,
 				319C2D9B2E606D1900864DF2 /* StatisticUITests */,
 				31DA5A192EDDAEBA0078F56B /* Frameworks */,
