@@ -41,13 +41,15 @@ class ServerModel: Identifiable {
     var host: String
     var port: Int
     var components: [String] = []
+    var placeholder: Bool = false
     
-    init(scheme: String, name: String, host: String, port: Int, components: [ServerComponents]) {
+    init(scheme: String, name: String, host: String, port: Int, components: [ServerComponents], placeholder: Bool = false) {
         self.scheme = scheme
         self.name = name
         self.host = host
         self.port = port
         self.components = components.map(\.self.rawValue)
+        self.placeholder = placeholder
     }
 }
 
