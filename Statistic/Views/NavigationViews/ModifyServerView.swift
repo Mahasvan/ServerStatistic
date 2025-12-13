@@ -75,7 +75,6 @@ struct ModifyServerView: View {
     
     
     var body: some View {
-        Text(self.server.placeholder.description)
         Form {
             TextField("Nickname", text: $name)
             Picker(selection: $scheme, label: Text("Scheme")) {
@@ -104,7 +103,7 @@ struct ModifyServerView: View {
             .modifier(GlassButton())
         }
         .frame(maxWidth: 500)
-        .navigationTitle("Add Server")
+        .navigationTitle(self.addingNewServer ? "Adding Server" : "Editing Server")
         
         .alert("Saved Successfully!", isPresented: $showSuccessAlert) {
         
@@ -125,13 +124,11 @@ struct ModifyServerView: View {
         if link != nil {
 
             Text("Access Your Server At")
-//                .font(.caption)
                 .padding(.top, 10)
                 
             HStack {
                 Link(destination: link ?? URL(string: "http://localhost")!) {
                     Text(url)
-//                        .foregroundStyle(.blue)
                         .font(.headline)
                     Image(systemName: "link")
                 }

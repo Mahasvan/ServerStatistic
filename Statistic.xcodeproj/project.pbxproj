@@ -45,7 +45,6 @@
 		319C2D802E606D1800864DF2 /* Statistic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Statistic.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D8E2E606D1900864DF2 /* StatisticTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		319C2D982E606D1900864DF2 /* StatisticUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = StatisticUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		31DA5A1A2EDDAEBA0078F56B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		31DA5A1C2EDDAEBA0078F56B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -130,7 +129,6 @@
 		31DA5A192EDDAEBA0078F56B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				31DA5A1A2EDDAEBA0078F56B /* WidgetKit.framework */,
 				31DA5A1C2EDDAEBA0078F56B /* SwiftUI.framework */,
 			);
 			name = Frameworks;
