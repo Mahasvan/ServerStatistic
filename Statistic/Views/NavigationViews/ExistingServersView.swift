@@ -11,12 +11,15 @@ import SwiftData
 struct ExistingServersView: View {
     @Environment(\.modelContext) private var modelContext
     
-    @Query private var serverModel: [ServerModel]
+    @Query(filter: ServerModel.getValidServers())
+    private var serverModel: [ServerModel]
     @State private var sortOrder = [KeyPathComparator(\ServerModel.name)]
     
     @State private var isShowingDeleteAlert: Bool = false
     
     @State private var selectedServerID: ServerModel.ID?
+    
+    @State private var navigationPath: [ServerModel.ID] = []
     
     private var selectedServer: ServerModel? {
         guard let selectedServerID else { return nil }
@@ -33,7 +36,7 @@ struct ExistingServersView: View {
     
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPath) {
             ZStack {
                 Table(sortedServers, selection: $selectedServerID, sortOrder: $sortOrder) {
                     TableColumn("Name", value: \.name)
@@ -45,11 +48,7 @@ struct ExistingServersView: View {
                         HStack {
                             ForEach(server.components, id: \.self) { component in
                                 Image(systemName: getComponentImage(component))
-//                                    .border(.blue)
                             }
-//                            ForEach(server.components, id: \.self) { component in
-//                                
-//                            }
                         }
                     }
                 }
@@ -61,9 +60,12 @@ struct ExistingServersView: View {
                             // this is the container for the Edit and Delete Buttons
                             Spacer()
                             
-                            Button(action: {}) {
+                            Button(action: {
+                                if let server = selectedServer {
+                                    navigationPath.append(server.id)
+                                }
+                            }) {
                                 Text("Edit")
-//                                    .scaleEffect(1.5)
                                     .padding(10)
                             }
                             .modifier(GlassButton())
@@ -90,13 +92,17 @@ struct ExistingServersView: View {
                                     .modifier(GlassButton())
                             }
                             
-                            
-                                
-
                             Spacer()
                         }
                         .padding(.bottom, 10)
                     }
+                }
+            }
+            .navigationDestination(for: ServerModel.ID.self) { id in
+                if let server = serverModel.first(where: { $0.id == id }) {
+                    EditServerView(server: server)
+                } else {
+                    ContentUnavailableView("Server not found", systemImage: "exclamationmark.triangle")
                 }
             }
         }

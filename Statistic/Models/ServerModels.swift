@@ -53,6 +53,20 @@ class ServerModel: Identifiable {
     }
 }
 
+extension ServerModel {
+    static func getValidServers() -> Predicate<ServerModel> {
+        return #Predicate<ServerModel> { server in
+            !server.placeholder
+        }
+    }
+    
+    static func getInvalidServers() -> Predicate<ServerModel> {
+        return #Predicate<ServerModel> { server in
+            server.placeholder
+        }
+    }
+}
+
 struct CPUResponseModel: Decodable {
     var currentUsage: Float?
     var currentTemp: Float?

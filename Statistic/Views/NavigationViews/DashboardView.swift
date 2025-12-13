@@ -10,7 +10,8 @@ import SwiftData
 
 struct DashboardView: View {
     @Environment(\.modelContext) private var serverModelContext
-    @Query private var serverModels: [ServerModel]
+    @Query(filter: ServerModel.getValidServers())
+    private var serverModels: [ServerModel]
     
     var body: some View {
         if serverModels.isEmpty {

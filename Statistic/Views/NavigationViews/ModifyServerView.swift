@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import SwiftData
 
 
 struct ModifyServerView: View {
@@ -26,6 +27,9 @@ struct ModifyServerView: View {
     
     @State private var showSuccessAlert: Bool = false
     
+    @Query(filter: ServerModel.getInvalidServers())
+    private var invalidServers: [ServerModel]
+    
     init(server: ServerModel, addingNewServer: Bool = false) {
         // Initialize the binding wrapper
         self.server = server
@@ -43,8 +47,16 @@ struct ModifyServerView: View {
             self._showSuccessAlert = State(initialValue: false)
         }
     }
+    
+    func pruneInvalidServers() -> Void {
+        for server in invalidServers {
+            modelContext.delete(server)
+        }
+    }
 
     func saveChanges() -> Void {
+        // prune placeholder servers that may be orphaned first
+        pruneInvalidServers()
         
         self.server.name = self.name
         self.server.scheme = self.scheme.rawValue
@@ -73,68 +85,68 @@ struct ModifyServerView: View {
         return formatter
     }()
     
-    
     var body: some View {
-        Form {
-            TextField("Nickname", text: $name)
-            Picker(selection: $scheme, label: Text("Scheme")) {
-                Text("HTTP").tag(Schemes.http)
-                Text("HTTPS").tag(Schemes.https)
-            }
-            .pickerStyle(.palette)
-            
-            TextField("Host", text: $host)
-            TextField("Port", value: $port, formatter: numberFormatter)
-            
-            Toggle(isOn: $cpu) {
-                Text("CPU")
-            }
-            Toggle(isOn: $disk) {
-                Text("Disk")
-            }
-            Toggle(isOn: $memory) {
-                Text("Memory")
-            }
-            
-            Button("Save") {
-                saveChanges()
-                showSuccessAlert = true
-            }
-            .modifier(GlassButton())
-        }
-        .frame(maxWidth: 500)
-        .navigationTitle(self.addingNewServer ? "Adding Server" : "Editing Server")
-        
-        .alert("Saved Successfully!", isPresented: $showSuccessAlert) {
-        
-            if #available(macOS 26.0, *) {
-                Button("OK", role: .confirm) {}
-                    .modifier(GlassButton())
-            } else {
-                Button("OK") {}
-                    .modifier(GlassButton())
-            }
-            
-        } message: {
-            Text("\(name) has been saved successfully!")
-        }
-    
-        let url = "\(scheme.rawValue)://\(host):\(port.description)"
-        let link: URL? = URL.init(string: url)
-        if link != nil {
-
-            Text("Access Your Server At")
-                .padding(.top, 10)
+        VStack {
+            Form {
+                TextField("Nickname", text: $name)
+                Picker(selection: $scheme, label: Text("Scheme")) {
+                    Text("HTTP").tag(Schemes.http)
+                    Text("HTTPS").tag(Schemes.https)
+                }
+                .pickerStyle(.palette)
                 
-            HStack {
-                Link(destination: link ?? URL(string: "http://localhost")!) {
-                    Text(url)
-                        .font(.headline)
-                    Image(systemName: "link")
+                TextField("Host", text: $host)
+                TextField("Port", value: $port, formatter: numberFormatter)
+                
+                Toggle(isOn: $cpu) {
+                    Text("CPU")
+                }
+                Toggle(isOn: $disk) {
+                    Text("Disk")
+                }
+                Toggle(isOn: $memory) {
+                    Text("Memory")
+                }
+                
+                Button("Save") {
+                    saveChanges()
+                    showSuccessAlert = true
+                }
+                .modifier(GlassButton())
+            }
+            .frame(maxWidth: 500)
+            .navigationTitle(self.addingNewServer ? "Adding Server" : "Editing Server")
+            
+            .alert("Saved Successfully!", isPresented: $showSuccessAlert) {
+                
+                if #available(macOS 26.0, *) {
+                    Button("OK", role: .confirm) {}
+                        .modifier(GlassButton())
+                } else {
+                    Button("OK") {}
+                        .modifier(GlassButton())
+                }
+                
+            } message: {
+                Text("\(name) has been saved successfully!")
+            }
+            
+            let url = "\(scheme.rawValue)://\(host):\(port.description)"
+            let link: URL? = URL.init(string: url)
+            if link != nil {
+                
+                Text("Access Your Server At")
+                    .padding(.top, 10)
+                
+                HStack {
+                    Link(destination: link ?? URL(string: "http://localhost")!) {
+                        Text(url)
+                            .font(.headline)
+                        Image(systemName: "link")
+                    }
                 }
             }
         }
-        
     }
 }
 
