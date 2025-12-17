@@ -28,6 +28,8 @@ struct DiskShortView: View {
             HStack(spacing: 0.0) {
                 Text("\(formatFloatAsInt(diskResponse?.currentUsage))")
                     .font(.system(size: 40, weight: .bold))
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: diskResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }

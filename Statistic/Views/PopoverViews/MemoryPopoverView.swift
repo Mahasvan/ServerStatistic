@@ -20,6 +20,8 @@ struct MemoryPopoverView: View {
                         Text("\(formatFloatAsInt(memoryResponse?.currentUsage))%")
                             .font(.system(size: 25, weight: .bold))
                     }
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: memoryResponse?.currentUsage)
                     
                     let percentFilled = (memoryResponse?.currentUsage ?? 0.0)
                     CircularProgressBar(

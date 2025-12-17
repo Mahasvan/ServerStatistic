@@ -26,6 +26,8 @@ struct MemoryShortView: View {
             HStack(spacing: 0.0) {
                 Text("\(formatFloatAsInt(memoryResponse?.currentUsage))")
                     .font(.system(size: 40, weight: .bold))
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: memoryResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }

@@ -20,6 +20,8 @@ struct DiskPopoverView: View {
                         Text("\(formatFloatAsInt(diskResponse?.currentUsage))%")
                             .font(.system(size: 25, weight: .bold))
                     }
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: diskResponse?.currentUsage)
                     
                     let percentFilled = (diskResponse?.currentUsage ?? 0.0)
                     CircularProgressBar(

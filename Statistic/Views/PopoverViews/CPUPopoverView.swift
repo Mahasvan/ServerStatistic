@@ -24,6 +24,9 @@ struct CPUPopoverView: View {
                         Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
                             .font(.system(size: 15, weight: .regular))
                     }
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: cpuResponse?.currentUsage)
+                    
                     CircularProgressBar(
                         lineWidth: 10,
                         diameter: 100.0,

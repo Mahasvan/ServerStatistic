@@ -26,6 +26,8 @@ struct CPUShortView: View {
             HStack(spacing: 0.0) {
                 Text(formatFloatAsInt(cpuResponse?.currentUsage))
                     .font(.system(size: 40, weight: .bold))
+                    .contentTransition(.numericText())
+                    .animation(.snappy, value: cpuResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
