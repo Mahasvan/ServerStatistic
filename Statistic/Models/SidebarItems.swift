@@ -18,7 +18,7 @@ struct SidebarItem: Identifiable {
 
 let SidebarItems = [
     SidebarItem(name: "Home", systemImage: "house", navigationLink: AnyView(DashboardView())),
-    SidebarItem(name: "Settings", systemImage: "gear", navigationLink: AnyView(Text("Not Implemented"))),
+    SidebarItem(name: "Settings", systemImage: "gear", navigationLink: AnyView(SettingsView())),
     SidebarItem(name: "Add Server", systemImage: "plus", navigationLink: AnyView(AddServerView())),
     SidebarItem(name: "View Servers", systemImage: "cloud.fill", navigationLink: AnyView(ExistingServersView()))
 ]

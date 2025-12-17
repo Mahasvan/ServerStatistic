@@ -15,18 +15,19 @@ struct SettingsView: View {
     @Query var staticInfo: [StaticServerInformationModel]
     
     func deleteServers() -> Void {
-        for model in serverModels {
-            modelContext.delete(model)
-        }
+        do {
+            try modelContext.delete(model: ServerModel.self)
+        } catch {}
     }
     
     func deleteStaticData() -> Void {
-        for model in staticInfo {
-            modelContext.delete(model)
-        }
+        do {
+            try modelContext.delete(model: StaticServerInformationModel.self)
+        } catch {}
     }
     
     var body: some View {
+        Text("These settings are meant only for development.")
         Button("Delete Static Data", action: deleteStaticData)
         Button("Delete Server Data", action: deleteServers)
     }
