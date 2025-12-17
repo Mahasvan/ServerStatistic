@@ -42,7 +42,6 @@ struct DashboardComponentView: View {
                     } catch {
                     }
                 }
-                
                 repeat {
                     await viewModel.loadComponentData(for: serverModel)
                     try? await Task.sleep(for: .seconds(5))

@@ -31,12 +31,6 @@ func queryItemsFromModel(_ model: ServerModel) async throws -> ComponentResponse
 
 class NetworkManager {
     static let shared = NetworkManager()
-    @Environment(\.modelContext) var modelContext
-    
-    @Query
-    private var staticInfoModels: [StaticServerInformationModel]
-    
-    init() {}
     
     func fetchStaticData(for server: ServerModel) async throws -> StaticServerInformationModel? {
         var components = URLComponents()

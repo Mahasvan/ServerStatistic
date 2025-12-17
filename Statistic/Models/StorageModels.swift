@@ -88,8 +88,6 @@ class StaticServerInformationModel: Identifiable {
     
     @Relationship
     var server: ServerModel
-
-    
     
     init(for server: ServerModel, cpu: CPUStaticInfo?, memory: MemoryStaticInfo?, disk: DiskStaticInfo?) {
         self.id = UUID()

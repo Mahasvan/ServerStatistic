@@ -31,9 +31,11 @@ struct ExistingServersView: View {
     }
     
     func deleteServer(server: ServerModel) {
+        if let staticInfo = server.staticInfo {
+            modelContext.delete(staticInfo)
+        }
         modelContext.delete(server)
     }
-    
     
     var body: some View {
         NavigationStack(path: $navigationPath) {
