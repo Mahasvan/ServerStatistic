@@ -33,6 +33,28 @@ class ComponentResponseModel(BaseModel):
     disk: DiskResponseModel | None = None
 
 
+class CPUStaticInfo(BaseModel):
+    name: str | None = None
+    coreCount: int | None = None
+    threadCount: int | None = None
+
+
+class MemoryStaticInfo(BaseModel):
+    totalCapacity: int | None = None
+    clockSpeed: int | None = None
+
+
+class DiskStaticInfo(BaseModel):
+    volumeName: str | None = None
+    totalCapacity: int | None = None
+
+
+class StaticResponseModel(BaseModel):
+    cpu: CPUStaticInfo | None = None
+    memory: MemoryStaticInfo | None = None
+    disk: DiskStaticInfo | None = None
+
+
 # ---------- ROUTES ----------
 
 
@@ -74,7 +96,37 @@ def get_components(
     return ComponentResponseModel(**response)
 
 
+@app.get("/components/static", response_model=StaticResponseModel)
+def get_static_components():
+    import platform
+
+    # CPU
+    cpu_name = platform.processor()
+    cpu = CPUStaticInfo(
+        name=cpu_name,
+        coreCount=psutil.cpu_count(logical=False),
+        threadCount=psutil.cpu_count(logical=True),
+    )
+
+    # Memory
+    mem = psutil.virtual_memory()
+    memory = MemoryStaticInfo(
+        totalCapacity=int(mem.total),
+        clockSpeed=None,
+    )
+
+    # Disk
+    disk_usage = psutil.disk_usage("/")
+    disk = DiskStaticInfo(
+        volumeName="System Root",
+        totalCapacity=int(disk_usage.total),
+    )
+
+    return StaticResponseModel(cpu=cpu, memory=memory, disk=disk)
+
+
 # ---------- RUN ----------
+# Start the server using: uvicorn server:app --host 0.0.0.0 --port 8080
 
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
