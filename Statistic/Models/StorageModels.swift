@@ -89,8 +89,9 @@ class StaticServerInformationModel: Identifiable {
 
 extension StaticServerInformationModel {
     static func getStaticInformation(for server: ServerModel) -> Predicate<StaticServerInformationModel> {
+        let serverID = server.id
         return #Predicate<StaticServerInformationModel> { staticInfo in
-            staticInfo.id == server.id
+            staticInfo.id == serverID
         }
     }
 }
@@ -146,3 +147,4 @@ class ComponentViewModel: ObservableObject {
         isLoading = false
     }
 }
+
