@@ -1,11 +1,11 @@
 # server.py
-# A simple API server that matches the structure your Swift client expects.
+# An API server that matches the structure that the Statistic Swift client expects.
 
+import platform
+import psutil
+import uvicorn
 from fastapi import FastAPI, Query
 from pydantic import BaseModel
-import psutil  # optional; used for real metrics. Install with: pip install psutil
-import uvicorn
-
 
 app = FastAPI()
 
@@ -98,8 +98,6 @@ def get_components(
 
 @app.get("/components/static", response_model=StaticResponseModel)
 def get_static_components():
-    import platform
-
     # CPU
     cpu_name = platform.processor()
     cpu = CPUStaticInfo(
