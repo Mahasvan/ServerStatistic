@@ -9,8 +9,7 @@ import SwiftUI
 
 struct MemoryShortView: View {
     
-    @Binding var usagePercent: Float?
-    @Binding var totalCapacity: Float?
+    var memoryResponse: MemoryResponseModel?
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -22,13 +21,13 @@ struct MemoryShortView: View {
             }
             HStack(spacing: 0.0) {
                 
-                Text("\(formatFloatAsInt(usagePercent))")
+                Text("\(formatFloatAsInt(memoryResponse?.currentUsage))")
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
             .font(.system(size: 40, weight: .bold))
             
-            Text("of \(formatFloatAsInt(totalCapacity)) GB")
+            Text("of \(formatFloatAsInt(memoryResponse?.totalCapacity)) GB")
 //                .font(.system(size: 30, weight: .bold))
         
         }
@@ -37,5 +36,5 @@ struct MemoryShortView: View {
 }
 
 #Preview {
-    MemoryShortView(usagePercent: .constant(50), totalCapacity: .constant(16))
+    MemoryShortView(memoryResponse: MemoryResponseModel(currentUsage: 50,totalCapacity: 100))
 }

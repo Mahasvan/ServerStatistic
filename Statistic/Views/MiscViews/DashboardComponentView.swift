@@ -6,36 +6,40 @@
 //
 
 import SwiftUI
+import SwiftData
 
 struct DashboardComponentView: View {
+    @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ComponentViewModel()
-
     @Binding var serverModel: ServerModel
+    private let serverID: UUID
+
+    @Query(filter: ServerModel.getValidServers())
+    private var serverModels: [ServerModel]
     
-    func getCpuString(percentage: Float) -> String {
-        return String(Int(percentage*100)) + "%"
+    @Query private var staticServerInformation: [StaticServerInformationModel]
+
+    init(serverModel: Binding<ServerModel>) {
+        self._serverModel = serverModel
+        self.serverID = serverModel.wrappedValue.id
+        // Configure the query with a predicate that captures serverID
+        self._staticServerInformation = Query(filter: StaticServerInformationModel.getStaticInformation(for: serverModel.wrappedValue))
     }
+    
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if (serverModel.components.contains("CPU")) {
-                    let currentCpuUsage: Float? = viewModel.componentResponse.cpu?.currentUsage
-                    let currentCpuTemp: Float? = viewModel.componentResponse.cpu?.currentTemp
-                    CPUShortView(usage: .constant(currentCpuUsage), temp: .constant(currentCpuTemp))
+                    CPUShortView(cpuResponse: viewModel.componentResponse.cpu)
                 }
 
                 if (serverModel.components.contains("Disk")) {
-                    let currentDiskUsage: Float? = viewModel.componentResponse.disk?.currentUsage
-                    let totalDiskCapacity: Float? = viewModel.componentResponse.disk?.totalCapacity
-                    
-                    DiskShortView(usagePercent: .constant(currentDiskUsage), totalCapacity: .constant(totalDiskCapacity))
+                    DiskShortView(diskResponse: viewModel.componentResponse.disk)
                 }
                 
                 if (serverModel.components.contains("Memory")) {
-                    let currentMemoryUsage: Float? = viewModel.componentResponse.memory?.currentUsage
-                    let totalMemoryCapacity: Float? = viewModel.componentResponse.memory?.totalCapacity
-                    MemoryShortView(usagePercent: .constant(currentMemoryUsage), totalCapacity: .constant(totalMemoryCapacity))
+                    MemoryShortView(memoryResponse: viewModel.componentResponse.memory)
                 }
             }
             .task {

@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct CPUShortView: View {
-
-    @Binding var usage: Float?
-    @Binding var temp: Float?
+    
+    var cpuResponse: CPUResponseModel?
+    
+    @State private var isPopoverShown: Bool = false
 
     var body: some View {
         VStack(alignment: .leading) {
@@ -21,28 +22,33 @@ struct CPUShortView: View {
                     .font(.title2)
             }
             HStack(spacing: 0.0) {
-                Text(formatFloatAsInt(usage))
+                Text(formatFloatAsInt(cpuResponse?.currentUsage))
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
             .font(.system(size: 40, weight: .bold))
-            Text("\(formatFloatAsInt(temp))°C")
+            Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
 //                .font(.system(size: 30, weight: .bold))
         }
+        .onTapGesture {
+            isPopoverShown = true
+        }
         .frame(width: 120, height: 120)
+        .popover(isPresented: $isPopoverShown, arrowEdge: .trailing) {
+            AppleCPUPopoverView()
+        }
     }
 }
 
 private struct ShortComponentViewPreview: View {
+    var cpuResponse = CPUResponseModel()
     var body: some View {
-        CPUShortView(usage: .constant(50.0), temp: .constant(75.0))
+        CPUShortView(cpuResponse: cpuResponse)
     }
 }
 
 #Preview {
     ZStack {
-//        Rectangle().fill(Color.black).frame(width: 300, height: 300)
-//        Image(systemName: "arrow.up.circle.fill").resizable().frame(width: 30, height: 30).padding()
         ShortComponentViewPreview()
     }
 }

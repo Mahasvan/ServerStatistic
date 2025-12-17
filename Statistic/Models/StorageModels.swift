@@ -67,6 +67,34 @@ extension ServerModel {
     }
 }
 
+
+@Model
+class StaticServerInformationModel: Identifiable {
+    @Attribute(.unique) var id: UUID
+    var cpuName: String?
+    var cpuCores: Int?
+    var cpuThreads: Int?
+    var totalMemoryCapacity: Int?
+    var totalDiskCapacity: Int?
+    
+    init(serverID: UUID, cpuName: String?, cpuCores: Int?, cpuThreads: Int?, totalMemoryCapacity: Int?, totalDiskCapacity: Int?) {
+        self.id = serverID
+        self.cpuName = cpuName
+        self.cpuCores = cpuCores
+        self.cpuThreads = cpuThreads
+        self.totalMemoryCapacity = totalMemoryCapacity
+        self.totalDiskCapacity = totalDiskCapacity
+    }
+}
+
+extension StaticServerInformationModel {
+    static func getStaticInformation(for server: ServerModel) -> Predicate<StaticServerInformationModel> {
+        return #Predicate<StaticServerInformationModel> { staticInfo in
+            staticInfo.id == server.id
+        }
+    }
+}
+
 struct CPUResponseModel: Decodable {
     var currentUsage: Float?
     var currentTemp: Float?

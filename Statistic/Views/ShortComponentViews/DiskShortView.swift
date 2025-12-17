@@ -9,9 +9,9 @@ import SwiftUI
 
 struct DiskShortView: View {
     
-    @Binding var usagePercent: Float?
-    @Binding var totalCapacity: Float?
+    var diskResponse: DiskResponseModel?
     
+
     
     var body: some View {
         
@@ -24,18 +24,18 @@ struct DiskShortView: View {
             }
             
             HStack(spacing: 0.0) {
-                Text("\(formatFloatAsInt(usagePercent))")
+                Text("\(formatFloatAsInt(diskResponse?.currentUsage))")
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
             .font(.system(size: 40, weight: .bold))
             
-            Text("of \(formatFloatAsInt(totalCapacity)) GB")
+            Text("of \(formatFloatAsInt(diskResponse?.totalCapacity)) GB")
         }
         .frame(width: 120, height: 120)
     }
 }
 
 #Preview {
-    DiskShortView(usagePercent: .constant(50), totalCapacity: .constant(100))
+    DiskShortView(diskResponse: DiskResponseModel())
 }
