@@ -38,7 +38,7 @@ class NetworkManager {
     
     init() {}
     
-    func updateStaticData(for server: ServerModel) async throws -> Void {
+    func fetchStaticData(for server: ServerModel) async throws -> StaticServerInformationModel? {
         var components = URLComponents()
         components.scheme = server.scheme
         components.host = server.host
@@ -51,17 +51,10 @@ class NetworkManager {
         let (data, _) = try await URLSession.shared.data(from: url)
         let response: StaticResponseModel? = try JSONDecoder().decode(StaticResponseModel.self, from: data)
         if (response != nil) {
-            // remove existing entries first
-            
-            for serverInfoModel in staticInfoModels {
-                if serverInfoModel.id.uuidString == server.id.uuidString {
-                    modelContext.delete(serverInfoModel)
-                }
-            }
-            
-            let serverInfo = StaticServerInformationModel(serverID: server.id, cpu: response?.cpu, memory: response?.memory, disk: response?.disk)
-            modelContext.insert(serverInfo)
+            let serverInfo = StaticServerInformationModel(for: server, cpu: response?.cpu, memory: response?.memory, disk: response?.disk)
+            return serverInfo
         }
+        return nil
     }
     
     func fetchComponentData(scheme: String, host: String, port: Int, options: ComponentOptions) async throws -> ComponentResponseModel {

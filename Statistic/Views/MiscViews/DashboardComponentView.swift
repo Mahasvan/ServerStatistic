@@ -5,27 +5,17 @@
 //  Created by Mahasvan Mohan on 28/08/25.
 //
 
+// This view also populates Static Data for the server when it loads, if not present.
+
 import SwiftUI
 import SwiftData
 
 struct DashboardComponentView: View {
+    
     @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ComponentViewModel()
     @Binding var serverModel: ServerModel
-    private let serverID: UUID
 
-    @Query(filter: ServerModel.getValidServers())
-    private var serverModels: [ServerModel]
-    
-    @Query private var staticServerInformation: [StaticServerInformationModel]
-
-    init(serverModel: Binding<ServerModel>) {
-        self._serverModel = serverModel
-        self.serverID = serverModel.wrappedValue.id
-        // Configure the query with a predicate that captures serverID
-        self._staticServerInformation = Query(filter: StaticServerInformationModel.getStaticInformation(for: serverModel.wrappedValue))
-    }
-    
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -43,13 +33,21 @@ struct DashboardComponentView: View {
                 }
             }
             .task {
+                if self.serverModel.staticInfo == nil {
+                    do {
+                        let model = try await NetworkManager.shared.fetchStaticData(for: serverModel)
+                        if model != nil {
+                            modelContext.insert(model!)
+                        }
+                    } catch {
+                    }
+                }
+                
                 repeat {
                     await viewModel.loadComponentData(for: serverModel)
                     try? await Task.sleep(for: .seconds(5))
                 } while (!Task.isCancelled)
             }
-//            .frame(width: 750, height: 250)
-//            .scrollTargetLayout()
         }
     }
 }

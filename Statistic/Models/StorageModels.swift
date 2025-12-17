@@ -42,6 +42,10 @@ class ServerModel: Identifiable {
     var port: Int
     var components: [String] = []
     var placeholder: Bool = false
+
+    @Relationship(inverse: \StaticServerInformationModel.server)
+    var staticInfo: StaticServerInformationModel?
+
     
     init(scheme: String, name: String, host: String, port: Int, components: [ServerComponents], placeholder: Bool = false) {
         self.scheme = scheme
@@ -71,15 +75,32 @@ extension ServerModel {
 @Model
 class StaticServerInformationModel: Identifiable {
     @Attribute(.unique) var id: UUID
-    var cpu: CPUStaticInfo?
-    var memory: MemoryStaticInfo?
-    var disk: DiskStaticInfo?
     
-    init(serverID: UUID, cpu: CPUStaticInfo?, memory: MemoryStaticInfo?, disk: DiskStaticInfo?) {
-        self.id = serverID
-        self.cpu = cpu
-        self.memory = memory
-        self.disk = disk
+    var cpuName: String?
+    var cpuCoreCount: Int?
+    var cpuThreadCount: Int?
+    
+    var memoryTotalCapacity: Int?
+    var memoryClockSpeed: Int?
+    
+    var diskVolumeName: String?
+    var diskTotalCapacity: Int?
+    
+    @Relationship
+    var server: ServerModel
+
+    
+    
+    init(for server: ServerModel, cpu: CPUStaticInfo?, memory: MemoryStaticInfo?, disk: DiskStaticInfo?) {
+        self.id = UUID()
+        self.server = server
+        self.cpuName = cpu?.name
+        self.cpuCoreCount = cpu?.coreCount
+        self.cpuThreadCount = cpu?.threadCount
+        self.memoryTotalCapacity = memory?.totalCapacity
+        self.memoryClockSpeed = memory?.clockSpeed
+        self.diskVolumeName = disk?.volumeName
+        self.diskTotalCapacity = disk?.totalCapacity
     }
 }
 
@@ -106,7 +127,7 @@ struct CPUStaticInfo: Decodable {
 
 struct MemoryStaticInfo: Decodable {
     var totalCapacity: Int?
-    var clockSpeed: String?
+    var clockSpeed: Int?
 }
 
 struct DiskStaticInfo: Decodable {
