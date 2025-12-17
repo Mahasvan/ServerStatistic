@@ -16,20 +16,20 @@ struct DiskShortView: View {
     var body: some View {
         
         VStack(alignment: .leading) {
-            HStack {
+            HStack(spacing: 0) {
                 Image(systemName: "internaldrive")
-                    .scaleEffect(1.5)
+                    .font(.title)
                 Text("Disk")
                     .font(.title2)
+                    .fontWeight(.bold)
             }
             
             HStack(spacing: 0.0) {
                 Text("\(formatFloatAsInt(diskResponse?.currentUsage))")
+                    .font(.system(size: 40, weight: .bold))
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            .font(.system(size: 40, weight: .bold))
-            
             Text("of \(formatFloatAsInt(diskResponse?.totalCapacity)) GB")
         }
         .frame(width: 120, height: 120)

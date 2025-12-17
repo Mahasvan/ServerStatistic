@@ -13,22 +13,20 @@ struct MemoryShortView: View {
     
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
+            HStack(spacing: 0.0) {
                 Image(systemName: "memorychip")
-                    .scaleEffect(1.5)
+                    .font(.title)
                 Text("Memory")
                     .font(.title2)
+                    .fontWeight(.bold)
             }
             HStack(spacing: 0.0) {
-                
                 Text("\(formatFloatAsInt(memoryResponse?.currentUsage))")
+                    .font(.system(size: 40, weight: .bold))
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            .font(.system(size: 40, weight: .bold))
-            
             Text("of \(formatFloatAsInt(memoryResponse?.totalCapacity)) GB")
-//                .font(.system(size: 30, weight: .bold))
         
         }
         .frame(width: 120, height: 120)

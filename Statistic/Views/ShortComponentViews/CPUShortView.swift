@@ -16,20 +16,20 @@ struct CPUShortView: View {
 
     var body: some View {
         VStack(alignment: .leading) {
-            HStack {
+            HStack(spacing: 0) {
                 Image(systemName: "cpu")
-                    .scaleEffect(1.5)
+                    .font(.title)
                 Text("CPU")
                     .font(.title2)
+                    .fontWeight(.bold)
             }
             HStack(spacing: 0.0) {
                 Text(formatFloatAsInt(cpuResponse?.currentUsage))
+                    .font(.system(size: 40, weight: .bold))
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            .font(.system(size: 40, weight: .bold))
             Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
-//                .font(.system(size: 30, weight: .bold))
         }
         .onTapGesture {
             isPopoverShown = true
