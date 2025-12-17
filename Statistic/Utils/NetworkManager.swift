@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftData
+import SwiftUI
 
 struct ComponentOptions: Codable {
     var cpu: Bool = false
@@ -29,6 +31,38 @@ func queryItemsFromModel(_ model: ServerModel) async throws -> ComponentResponse
 
 class NetworkManager {
     static let shared = NetworkManager()
+    @Environment(\.modelContext) var modelContext
+    
+    @Query
+    private var staticInfoModels: [StaticServerInformationModel]
+    
+    init() {}
+    
+    func updateStaticData(for server: ServerModel) async throws -> Void {
+        var components = URLComponents()
+        components.scheme = server.scheme
+        components.host = server.host
+        components.port = server.port
+        components.path = "/components/static"
+        
+        guard let url = components.url else {
+            throw URLError(.badURL)
+        }
+        let (data, _) = try await URLSession.shared.data(from: url)
+        let response: StaticResponseModel? = try JSONDecoder().decode(StaticResponseModel.self, from: data)
+        if (response != nil) {
+            // remove existing entries first
+            
+            for serverInfoModel in staticInfoModels {
+                if serverInfoModel.id.uuidString == server.id.uuidString {
+                    modelContext.delete(serverInfoModel)
+                }
+            }
+            
+            let serverInfo = StaticServerInformationModel(serverID: server.id, cpu: response?.cpu, memory: response?.memory, disk: response?.disk)
+            modelContext.insert(serverInfo)
+        }
+    }
     
     func fetchComponentData(scheme: String, host: String, port: Int, options: ComponentOptions) async throws -> ComponentResponseModel {
         

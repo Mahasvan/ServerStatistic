@@ -92,6 +92,12 @@ extension StaticServerInformationModel {
     }
 }
 
+struct StaticResponseModel: Decodable {
+    var cpu: CPUStaticInfo?
+    var memory: MemoryStaticInfo?
+    var disk: DiskStaticInfo?
+}
+
 struct CPUStaticInfo: Decodable {
     var name: String?
     var coreCount: Int?
