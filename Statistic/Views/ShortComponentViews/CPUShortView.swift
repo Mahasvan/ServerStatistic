@@ -10,6 +10,7 @@ import SwiftUI
 struct CPUShortView: View {
     
     var cpuResponse: CPUResponseModel?
+    var staticData: StaticServerInformationModel?
     
     @State private var isPopoverShown: Bool = false
 
@@ -35,7 +36,7 @@ struct CPUShortView: View {
         }
         .frame(width: 120, height: 120)
         .popover(isPresented: $isPopoverShown, arrowEdge: .trailing) {
-            AppleCPUPopoverView()
+            CPUPopoverView(cpuResponse: cpuResponse, staticData: staticData)
         }
     }
 }

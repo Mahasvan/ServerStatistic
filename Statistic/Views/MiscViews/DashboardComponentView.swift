@@ -14,14 +14,14 @@ struct DashboardComponentView: View {
     
     @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ComponentViewModel()
-    @Binding var serverModel: ServerModel
+    var serverModel: ServerModel
 
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
                 if (serverModel.components.contains("CPU")) {
-                    CPUShortView(cpuResponse: viewModel.componentResponse.cpu)
+                    CPUShortView(cpuResponse: viewModel.componentResponse.cpu, staticData: serverModel.staticInfo)
                 }
 
                 if (serverModel.components.contains("Disk")) {
@@ -53,6 +53,6 @@ struct DashboardComponentView: View {
 
 #Preview {
     let vader = ServerModel(scheme: "http", name: "vader", host: "localhost", port: 8000, components: [.CPU, .Memory, .Disk])
-    DashboardComponentView(serverModel: .constant(vader))
+    DashboardComponentView(serverModel: vader)
         .frame(height: 500)
 }

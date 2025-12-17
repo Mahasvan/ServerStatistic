@@ -7,21 +7,41 @@
 
 import SwiftUI
 
-struct AppleCPUPopoverView: View {
+struct CPUPopoverView: View {
     
-    var cpuName: String?
-    var cpuCores: Int?
-    
-    var usage: Float?
-    var temperature: Float?
+    var cpuResponse: CPUResponseModel?
+    var staticData: StaticServerInformationModel?
     
     var body: some View {
+        
         VStack {
-            Text(cpuName ?? "?")
-            Text("\(cpuName ?? "?") Cores")
+            HStack {
+                
+                ZStack {
+                    VStack {
+                        Text("\(formatFloatAsInt(cpuResponse?.currentUsage))%")
+                            .font(.system(size: 25, weight: .bold))
+                        Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
+                            .font(.system(size: 15, weight: .regular))
+                    }
+                    CircularProgressBar(
+                        lineWidth: 10,
+                        diameter: 100.0,
+                        progress: .constant(CGFloat(cpuResponse?.currentUsage ?? 0.0)))
+                }
+                
+                VStack {
+                    Text(staticData?.cpuName ?? "?")
+                        .font(.system(size: 20, weight: .bold))
+                    
+                    Text("\(staticData?.cpuCoreCount?.description ?? "?") Cores")
+                    Text("\(staticData?.cpuThreadCount?.description ?? "?") Threads")
+                }
+            }
+            .padding(10)
             
-            Text("Usage: \(formatFloatAsInt(usage))%")
-            Text("Temperature: \(formatFloatAsInt(temperature))%")
+            
+            
         }
         .padding(20)
         
@@ -29,5 +49,13 @@ struct AppleCPUPopoverView: View {
 }
 
 #Preview {
-    AppleCPUPopoverView(cpuName: "Apple M3", cpuCores: 8)
+    let CPUData = CPUResponseModel(currentUsage: 0.3, currentTemp: 100)
+    let serverModel = ServerModel(scheme: "scheme", name: "Name", host: "host", port: 1000, components: [])
+    let staticData = StaticServerInformationModel(
+        for: serverModel,
+        cpu: CPUStaticInfo(name: "Apple M3", coreCount: 8, threadCount: 8),
+        memory: nil,
+        disk: nil
+        )
+    CPUPopoverView(cpuResponse: CPUData, staticData: staticData)
 }

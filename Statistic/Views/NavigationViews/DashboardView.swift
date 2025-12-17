@@ -29,7 +29,7 @@ struct DashboardView: View {
                             .font(.title2)
                             .bold()
                             .fontDesign(.rounded)
-                        DashboardComponentView(serverModel: .constant(server))
+                        DashboardComponentView(serverModel: server)
                     }
                     Divider()
                 }

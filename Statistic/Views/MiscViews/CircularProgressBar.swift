@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct CircularProgressBar: View {
-    @Binding var lineWidth: CGFloat
-    @Binding var progress: CGFloat
+    var lineWidth: CGFloat
+    var diameter: CGFloat
+    @Binding var progress: CGFloat // 0 to 100
     
     
     var body: some View {
@@ -21,7 +22,7 @@ struct CircularProgressBar: View {
                 )
                 
             Circle()
-                .trim(from: 0, to: progress)
+                .trim(from: 0, to: progress / 100)
                 .stroke(
                     Color.pink,
                     style: StrokeStyle(
@@ -35,9 +36,10 @@ struct CircularProgressBar: View {
                 .shadow(radius: 5)
         }
         .aspectRatio(1, contentMode: .fit)
+        .frame(width: diameter)
     }
 }
 
 #Preview {
-    CircularProgressBar(lineWidth: .constant(20.0), progress: .constant(0.5))
+    CircularProgressBar(lineWidth: 10, diameter: 100, progress: .constant(0.5))
 }
