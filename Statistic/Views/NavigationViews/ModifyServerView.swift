@@ -76,6 +76,10 @@ struct ModifyServerView: View {
         }
         self.server.components = serverComponents
         self.server.placeholder = false
+        
+        if addingNewServer {
+            modelContext.insert(server)
+        }
     }
     
     
