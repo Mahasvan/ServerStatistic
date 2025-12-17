@@ -71,19 +71,15 @@ extension ServerModel {
 @Model
 class StaticServerInformationModel: Identifiable {
     @Attribute(.unique) var id: UUID
-    var cpuName: String?
-    var cpuCores: Int?
-    var cpuThreads: Int?
-    var totalMemoryCapacity: Int?
-    var totalDiskCapacity: Int?
+    var cpu: CPUStaticInfo?
+    var memory: MemoryStaticInfo?
+    var disk: DiskStaticInfo?
     
-    init(serverID: UUID, cpuName: String?, cpuCores: Int?, cpuThreads: Int?, totalMemoryCapacity: Int?, totalDiskCapacity: Int?) {
+    init(serverID: UUID, cpu: CPUStaticInfo?, memory: MemoryStaticInfo?, disk: DiskStaticInfo?) {
         self.id = serverID
-        self.cpuName = cpuName
-        self.cpuCores = cpuCores
-        self.cpuThreads = cpuThreads
-        self.totalMemoryCapacity = totalMemoryCapacity
-        self.totalDiskCapacity = totalDiskCapacity
+        self.cpu = cpu
+        self.memory = memory
+        self.disk = disk
     }
 }
 
@@ -94,6 +90,22 @@ extension StaticServerInformationModel {
             staticInfo.id == serverID
         }
     }
+}
+
+struct CPUStaticInfo: Decodable {
+    var name: String?
+    var coreCount: Int?
+    var threadCount: Int?
+}
+
+struct MemoryStaticInfo: Decodable {
+    var totalCapacity: Int?
+    var clockSpeed: String?
+}
+
+struct DiskStaticInfo: Decodable {
+    var volumeName: String?
+    var totalCapacity: Int?
 }
 
 struct CPUResponseModel: Decodable {
