@@ -80,11 +80,11 @@ class StaticServerInformationModel: Identifiable {
     var cpuCoreCount: Int?
     var cpuThreadCount: Int?
     
-    var memoryTotalCapacity: Int?
+    var memoryTotalCapacity: Float?
     var memoryClockSpeed: Int?
     
     var diskVolumeName: String?
-    var diskTotalCapacity: Int?
+    var diskTotalCapacity: Float?
     
     @Relationship
     var server: ServerModel
@@ -124,13 +124,13 @@ struct CPUStaticInfo: Decodable {
 }
 
 struct MemoryStaticInfo: Decodable {
-    var totalCapacity: Int?
+    var totalCapacity: Float?
     var clockSpeed: Int?
 }
 
 struct DiskStaticInfo: Decodable {
     var volumeName: String?
-    var totalCapacity: Int?
+    var totalCapacity: Float?
 }
 
 struct CPUResponseModel: Decodable {

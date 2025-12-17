@@ -40,13 +40,13 @@ class CPUStaticInfo(BaseModel):
 
 
 class MemoryStaticInfo(BaseModel):
-    totalCapacity: int | None = None
+    totalCapacity: float | None = None
     clockSpeed: int | None = None
 
 
 class DiskStaticInfo(BaseModel):
     volumeName: str | None = None
-    totalCapacity: int | None = None
+    totalCapacity: float | None = None
 
 
 class StaticResponseModel(BaseModel):
@@ -111,7 +111,7 @@ def get_static_components():
     # Memory
     mem = psutil.virtual_memory()
     memory = MemoryStaticInfo(
-        totalCapacity=int(mem.total),
+        totalCapacity=float(mem.total),
         clockSpeed=None,
     )
 
@@ -119,7 +119,7 @@ def get_static_components():
     disk_usage = psutil.disk_usage("/")
     disk = DiskStaticInfo(
         volumeName="System Root",
-        totalCapacity=int(disk_usage.total),
+        totalCapacity=float(disk_usage.total) / 10e8,
     )
 
     return StaticResponseModel(cpu=cpu, memory=memory, disk=disk)

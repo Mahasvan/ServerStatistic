@@ -25,11 +25,11 @@ struct DashboardComponentView: View {
                 }
 
                 if (serverModel.components.contains("Disk")) {
-                    DiskShortView(diskResponse: viewModel.componentResponse.disk)
+                    DiskShortView(diskResponse: viewModel.componentResponse.disk, staticData: serverModel.staticInfo)
                 }
                 
                 if (serverModel.components.contains("Memory")) {
-                    MemoryShortView(memoryResponse: viewModel.componentResponse.memory)
+                    MemoryShortView(memoryResponse: viewModel.componentResponse.memory, staticData: serverModel.staticInfo)
                 }
             }
             .task {

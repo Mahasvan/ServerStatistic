@@ -10,8 +10,9 @@ import SwiftUI
 struct DiskShortView: View {
     
     var diskResponse: DiskResponseModel?
+    var staticData: StaticServerInformationModel?
     
-
+    @State private var isPopoverShown: Bool = false
     
     var body: some View {
         
@@ -30,9 +31,15 @@ struct DiskShortView: View {
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            Text("of \(formatFloatAsInt(diskResponse?.totalCapacity)) GB")
+            Text("of \(formatFloatAsInt(staticData?.diskTotalCapacity ?? 0.0)) GB")
         }
         .frame(width: 120, height: 120)
+        .onTapGesture {
+            isPopoverShown = true
+        }
+        .popover(isPresented: $isPopoverShown, arrowEdge: .trailing) {
+            DiskPopoverView(diskResponse: diskResponse, staticData: staticData)
+        }
     }
 }
 
