@@ -109,7 +109,7 @@ def get_static_components():
     # Memory
     mem = psutil.virtual_memory()
     memory = MemoryStaticInfo(
-        totalCapacity=float(mem.total),
+        totalCapacity=float(mem.total) / (1024**3),
         clockSpeed=None,
     )
 
