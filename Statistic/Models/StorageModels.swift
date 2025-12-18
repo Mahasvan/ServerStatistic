@@ -43,7 +43,7 @@ class ServerModel: Identifiable {
     var components: [String] = []
     var placeholder: Bool = false
 
-    @Relationship(inverse: \StaticServerInformationModel.server)
+    @Relationship(deleteRule: .cascade, inverse: \StaticServerInformationModel.server)
     var staticInfo: StaticServerInformationModel?
 
     
