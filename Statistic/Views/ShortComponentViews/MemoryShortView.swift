@@ -24,14 +24,14 @@ struct MemoryShortView: View {
                     .fontWeight(.bold)
             }
             HStack(spacing: 0.0) {
-                Text("\(formatFloatAsInt(memoryResponse?.currentUsage))")
+                Text("\((memoryResponse?.currentUsage).asNumericString)")
                     .font(.system(size: 40, weight: .bold))
                     .contentTransition(.numericText())
                     .animation(.snappy, value: memoryResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            Text("of \(formatFloatAsInt(staticData?.memoryTotalCapacity)) GB")
+            Text("of \((staticData?.memoryTotalCapacity).asNumericString) GB")
         }
         .frame(width: 120, height: 120)
         .onTapGesture {

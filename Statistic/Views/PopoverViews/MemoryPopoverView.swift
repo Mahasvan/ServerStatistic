@@ -17,7 +17,7 @@ struct MemoryPopoverView: View {
             HStack {
                 ZStack {
                     VStack {
-                        Text("\(formatFloatAsInt(memoryResponse?.currentUsage))%")
+                        Text("\((memoryResponse?.currentUsage).asNumericString)%")
                             .font(.system(size: 25, weight: .bold))
                     }
                     .contentTransition(.numericText())
@@ -31,7 +31,7 @@ struct MemoryPopoverView: View {
                 }
                 
                 VStack {
-                    Text("of \(formatFloatAsInt(staticData?.memoryTotalCapacity)) GB")
+                    Text("of \((staticData?.memoryTotalCapacity).asNumericString) GB")
                         .font(.system(size: 20, weight: .bold))
                     
                     Text("Speed: \(staticData?.memoryClockSpeed ?? 0) Hz")

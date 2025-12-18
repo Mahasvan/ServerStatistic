@@ -7,9 +7,18 @@
 
 import Foundation
 
-func formatFloatAsInt(_ value: Float?) -> String {
-    if value != nil {
-        return String(Int(ceil(value!)))
+extension Float {
+    func asIntCeil() -> Int {
+        Int(ceil(self))
     }
-    return "?"
+    
+    var asNumericString: String {
+        return self.asIntCeil().description
+    }
+}
+
+extension Optional where Wrapped == Float {
+  var asNumericString: String {
+      return self?.asIntCeil().description ?? "?"
+  }
 }

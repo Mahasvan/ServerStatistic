@@ -19,9 +19,9 @@ struct CPUPopoverView: View {
                 
                 ZStack {
                     VStack {
-                        Text("\(formatFloatAsInt(cpuResponse?.currentUsage))%")
+                        Text("\((cpuResponse?.currentUsage).asNumericString)%")
                             .font(.system(size: 25, weight: .bold))
-                        Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
+                        Text("\((cpuResponse?.currentTemp).asNumericString)°C")
                             .font(.system(size: 15, weight: .regular))
                     }
                     .contentTransition(.numericText())
