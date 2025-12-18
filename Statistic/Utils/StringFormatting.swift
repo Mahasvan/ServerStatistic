@@ -9,7 +9,7 @@ import Foundation
 
 func formatFloatAsInt(_ value: Float?) -> String {
     if value != nil {
-        return String(Int(value!))
+        return String(Int(ceil(value!)))
     }
     return "?"
 }
