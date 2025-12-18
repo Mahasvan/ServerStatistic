@@ -24,14 +24,14 @@ struct CPUShortView: View {
                     .fontWeight(.bold)
             }
             HStack(spacing: 0.0) {
-                Text(formatFloatAsInt(cpuResponse?.currentUsage))
+                Text((cpuResponse?.currentUsage).asNumericString)
                     .font(.system(size: 40, weight: .bold))
                     .contentTransition(.numericText())
                     .animation(.snappy, value: cpuResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            Text("\(formatFloatAsInt(cpuResponse?.currentTemp))°C")
+            Text("\((cpuResponse?.currentTemp).asNumericString)°C")
         }
         .onTapGesture {
             isPopoverShown = true

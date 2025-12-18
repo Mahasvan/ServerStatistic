@@ -26,14 +26,14 @@ struct DiskShortView: View {
             }
             
             HStack(spacing: 0.0) {
-                Text("\(formatFloatAsInt(diskResponse?.currentUsage))")
+                Text("\((diskResponse?.currentUsage).asNumericString)")
                     .font(.system(size: 40, weight: .bold))
                     .contentTransition(.numericText())
                     .animation(.snappy, value: diskResponse?.currentUsage)
                 Text("%")
                     .font(.system(size: 20, weight: .bold))
             }
-            Text("of \(formatFloatAsInt(staticData?.diskTotalCapacity ?? 0.0)) GB")
+            Text("of \((staticData?.diskTotalCapacity).asNumericString) GB")
         }
         .frame(width: 120, height: 120)
         .onTapGesture {

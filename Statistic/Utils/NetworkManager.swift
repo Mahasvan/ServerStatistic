@@ -42,6 +42,7 @@ class NetworkManager {
         guard let url = components.url else {
             throw URLError(.badURL)
         }
+        
         let (data, _) = try await URLSession.shared.data(from: url)
         let response: StaticResponseModel = try JSONDecoder().decode(StaticResponseModel.self, from: data)
         return StaticServerInformationModel(for: server, cpu: response.cpu, memory: response.memory, disk: response.disk)

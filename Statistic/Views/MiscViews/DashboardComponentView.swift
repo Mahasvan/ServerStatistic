@@ -34,7 +34,11 @@ struct DashboardComponentView: View {
                 }
             }
             .task {
-                if serverModel.staticInfo == nil, let model = try? await NetworkManager.shared.fetchStaticData(for: serverModel) { modelContext.insert(model)
+                    
+                if self.serverModel.staticInfo == nil {
+                    if let model = try? await NetworkManager.shared.fetchStaticData(for: serverModel) {
+                        modelContext.insert(model)
+                    }
                 }
                 
                 repeat {

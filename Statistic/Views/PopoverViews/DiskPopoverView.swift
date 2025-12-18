@@ -17,7 +17,7 @@ struct DiskPopoverView: View {
             HStack {
                 ZStack {
                     VStack {
-                        Text("\(formatFloatAsInt(diskResponse?.currentUsage))%")
+                        Text("\((diskResponse?.currentUsage).asNumericString)%")
                             .font(.system(size: 25, weight: .bold))
                     }
                     .contentTransition(.numericText())
@@ -34,7 +34,7 @@ struct DiskPopoverView: View {
                     Text(staticData?.diskVolumeName ?? "?")
                         .font(.system(size: 20, weight: .bold))
                     
-                    Text("Capacity: \(formatFloatAsInt(staticData?.diskTotalCapacity)) GB")
+                    Text("Capacity: \((staticData?.diskTotalCapacity).asNumericString) GB")
                 }
             }
             .padding(10)
