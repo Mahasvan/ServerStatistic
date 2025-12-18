@@ -15,21 +15,22 @@ struct DashboardComponentView: View {
     @Environment(\.modelContext) private var modelContext
     @StateObject private var viewModel = ComponentViewModel()
     var serverModel: ServerModel
-
+    
     
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack {
-                if (serverModel.components.contains("CPU")) {
-                    CPUShortView(cpuResponse: viewModel.componentResponse.cpu, staticData: serverModel.staticInfo)
-                }
-
-                if (serverModel.components.contains("Disk")) {
-                    DiskShortView(diskResponse: viewModel.componentResponse.disk, staticData: serverModel.staticInfo)
-                }
-                
-                if (serverModel.components.contains("Memory")) {
-                    MemoryShortView(memoryResponse: viewModel.componentResponse.memory, staticData: serverModel.staticInfo)
+                ForEach(serverModel.components, id: \.self) { component in
+                    switch String(describing: component) {
+                        case "CPU":
+                            CPUShortView(cpuResponse: viewModel.componentResponse.cpu, staticData: serverModel.staticInfo)
+                        case "Disk":
+                            DiskShortView(diskResponse: viewModel.componentResponse.disk, staticData: serverModel.staticInfo)
+                        case "Memory":
+                            MemoryShortView(memoryResponse: viewModel.componentResponse.memory, staticData: serverModel.staticInfo)
+                        default:
+                            EmptyView()
+                    }
                 }
             }
             .task {

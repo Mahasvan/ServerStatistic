@@ -44,13 +44,8 @@ class NetworkManager {
         }
         
         let (data, _) = try await URLSession.shared.data(from: url)
-        let response: StaticResponseModel? = try? JSONDecoder().decode(StaticResponseModel.self, from: data)
-        
-        if (response != nil) {
-            return StaticServerInformationModel(for: server, cpu: response?.cpu, memory: response?.memory, disk: response?.disk)
-        }
-        
-        throw URLError(.badServerResponse)
+        let response: StaticResponseModel = try JSONDecoder().decode(StaticResponseModel.self, from: data)
+        return StaticServerInformationModel(for: server, cpu: response.cpu, memory: response.memory, disk: response.disk)
     }
     
     func fetchComponentData(scheme: String, host: String, port: Int, options: ComponentOptions) async throws -> ComponentResponseModel {
