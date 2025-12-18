@@ -32,7 +32,7 @@ func queryItemsFromModel(_ model: ServerModel) async throws -> ComponentResponse
 class NetworkManager {
     static let shared = NetworkManager()
     
-    func fetchStaticData(for server: ServerModel) async throws -> StaticServerInformationModel? {
+    func fetchStaticData(for server: ServerModel) async throws -> StaticServerInformationModel {
         var components = URLComponents()
         components.scheme = server.scheme
         components.host = server.host
@@ -43,12 +43,8 @@ class NetworkManager {
             throw URLError(.badURL)
         }
         let (data, _) = try await URLSession.shared.data(from: url)
-        let response: StaticResponseModel? = try JSONDecoder().decode(StaticResponseModel.self, from: data)
-        if (response != nil) {
-            let serverInfo = StaticServerInformationModel(for: server, cpu: response?.cpu, memory: response?.memory, disk: response?.disk)
-            return serverInfo
-        }
-        return nil
+        let response: StaticResponseModel = try JSONDecoder().decode(StaticResponseModel.self, from: data)
+        return StaticServerInformationModel(for: server, cpu: response.cpu, memory: response.memory, disk: response.disk)
     }
     
     func fetchComponentData(scheme: String, host: String, port: Int, options: ComponentOptions) async throws -> ComponentResponseModel {
